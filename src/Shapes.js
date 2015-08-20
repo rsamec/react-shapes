@@ -16,7 +16,7 @@ export class Rectangle extends React.Component {
 
         return (
             <SVGComponent height={height} width={width}>
-                <rect {...props} x={strokeWidth} y={strokeWidth}>{this.props.children}</rect>
+                <rect {...props} x={strokeWidth / 2} y={strokeWidth / 2}>{this.props.children}</rect>
             </SVGComponent>)
     }
 }
