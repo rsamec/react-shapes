@@ -42,7 +42,7 @@ var App = React.createClass({
                 <TabPane eventKey={2} tab='Circle'>
                     <ShapeExample widget={Shapes.Circle}/>
                 </TabPane>
-                <TabPane eventKey={3} tab='Elippse'>
+                <TabPane eventKey={3} tab='Ellipse'>
                     <ShapeExample widget={Shapes.Ellipse}/>
                 </TabPane>
                 <TabPane eventKey={4} tab='Line'>
