@@ -28,8 +28,8 @@ export class Circle extends React.Component {
         var height = (r * 2) + 2 * strokeWidth;
         var width = (r * 2) + 2 * strokeWidth;
 
-        var cx = r + strokeWidth;
-        var cy = r + strokeWidth;
+        var cx = r + (strokeWidth / 2);
+        var cy = r + (strokeWidth / 2);
         var props = _.omit(this.props, 'style');
         return (
             <SVGComponent height={height} width={width}>
@@ -47,8 +47,9 @@ export class Ellipse extends React.Component {
         var height = (ry * 2) + 2 * strokeWidth;
         var width = (rx * 2) + 2 * strokeWidth;
 
-        var cx = rx + strokeWidth;
-        var cy = ry + strokeWidth;
+        var cx = rx + (strokeWidth / 2);
+        var cy = ry + (strokeWidth / 2);
+
         var props = _.omit(this.props, 'style');
         return (
             <SVGComponent height={height} width={width}>
