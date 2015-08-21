@@ -98,6 +98,28 @@ export class Polyline extends React.Component {
             </SVGComponent>)
     }
 }
+export class Triangle extends React.Component {
+    render() {
+        var strokeWidth = this.props.strokeWidth || 0;
+        var height      = this.props.height || 0;
+        var width       = this.props.width || 0;
+
+        var innerHeight = height - strokeWidth / 2;
+        var innerWidth  = width  - strokeWidth / 2;
+
+        var points = ['0,' + innerHeight, innerWidth / 2 + ',0', innerWidth + ',' + innerHeight];
+
+        var props = _.omit(this.props, 'style');
+        return (
+            <SVGComponent height={height + strokeWidth} width={width + strokeWidth}>
+                <polygon transform={'translate(' + 3 * strokeWidth / 4 + ',' + 11 * strokeWidth / 10 + ')'}
+                         points={points.join(' ')}
+                    {...props}>
+                    {this.props.children}
+                </polygon>
+            </SVGComponent>)
+    }
+}
 
 export class CornerLine extends React.Component {
     render() {
@@ -211,6 +233,14 @@ export default {
         metaData: {
             props: _.extend({
                 points: '25,25 25,350 500,350 500,500 305,250 20,15'
+            }, sharedShapeMetaData.defaultColors)
+        }
+    }),
+    Triangle: _.extend(Triangle, {
+        metaData: {
+            props: _.extend({
+                width: 200,
+                height: 200,
             }, sharedShapeMetaData.defaultColors)
         }
     }),

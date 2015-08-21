@@ -54,6 +54,9 @@ var App = React.createClass({
                 <TabPane eventKey={6} tab='CornerBox'>
                     <ShapeExample widget={Shapes.CornerBox}/>
                 </TabPane>
+                <TabPane eventKey={7} tab='Triangle'>
+                    <ShapeExample widget={Shapes.Triangle}/>
+                </TabPane>
             </TabbedArea>
 
         )
