@@ -1,6 +1,6 @@
 {
   "name": "react-shapes",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "private": false,
   "description": "React shapes.",
   "main": "lib/Shapes.js",
@@ -23,7 +23,6 @@
     "gulp": "^3.8.10",
     "react-bootstrap": "^0.24.3",
     "react-component-gulp-tasks": "^0.7.0",
-    "react-json": "0.0.1",
     "react-property-editor": "^0.1.6"
   },
   "peerDependencies": {},

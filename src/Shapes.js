@@ -86,11 +86,9 @@ export class Polyline extends React.Component {
         var x = _.max(_.map(points,function(point){return point.x}));
         var y = _.max(_.map(points,function(point){return point.y}));
 
-        console.log(points);
-
         var height = y + (2 * strokeWidth);
         var width = x + (2 * strokeWidth);
-        console.log(height + ", " + width);
+
         var props = _.omit(this.props, 'style');
         return (
             <SVGComponent height={height} width={width}>
