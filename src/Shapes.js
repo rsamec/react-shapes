@@ -16,7 +16,7 @@ export class Rectangle extends React.Component {
 
         return (
             <SVGComponent height={height} width={width}>
-                <rect {...props} x={strokeWidth} y={strokeWidth}>{this.props.children}</rect>
+                <rect {...props} x={strokeWidth / 2} y={strokeWidth / 2}>{this.props.children}</rect>
             </SVGComponent>)
     }
 }
@@ -28,8 +28,8 @@ export class Circle extends React.Component {
         var height = (r * 2) + 2 * strokeWidth;
         var width = (r * 2) + 2 * strokeWidth;
 
-        var cx = r + strokeWidth;
-        var cy = r + strokeWidth;
+        var cx = r + (strokeWidth / 2);
+        var cy = r + (strokeWidth / 2);
         var props = _.omit(this.props, 'style');
         return (
             <SVGComponent height={height} width={width}>
@@ -47,8 +47,9 @@ export class Ellipse extends React.Component {
         var height = (ry * 2) + 2 * strokeWidth;
         var width = (rx * 2) + 2 * strokeWidth;
 
-        var cx = rx + strokeWidth;
-        var cy = ry + strokeWidth;
+        var cx = rx + (strokeWidth / 2);
+        var cy = ry + (strokeWidth / 2);
+
         var props = _.omit(this.props, 'style');
         return (
             <SVGComponent height={height} width={width}>
@@ -94,6 +95,28 @@ export class Polyline extends React.Component {
         return (
             <SVGComponent height={height} width={width}>
                 <polyline {...props}>{this.props.children}</polyline>
+            </SVGComponent>)
+    }
+}
+export class Triangle extends React.Component {
+    render() {
+        var strokeWidth = this.props.strokeWidth || 0;
+        var height      = this.props.height || 0;
+        var width       = this.props.width || 0;
+
+        var innerHeight = height - strokeWidth / 2;
+        var innerWidth  = width  - strokeWidth / 2;
+
+        var points = ['0,' + innerHeight, innerWidth / 2 + ',0', innerWidth + ',' + innerHeight];
+
+        var props = _.omit(this.props, 'style');
+        return (
+            <SVGComponent height={height + strokeWidth} width={width + strokeWidth}>
+                <polygon transform={'translate(' + 3 * strokeWidth / 4 + ',' + 11 * strokeWidth / 10 + ')'}
+                         points={points.join(' ')}
+                    {...props}>
+                    {this.props.children}
+                </polygon>
             </SVGComponent>)
     }
 }
@@ -210,6 +233,14 @@ export default {
         metaData: {
             props: _.extend({
                 points: '25,25 25,350 500,350 500,500 305,250 20,15'
+            }, sharedShapeMetaData.defaultColors)
+        }
+    }),
+    Triangle: _.extend(Triangle, {
+        metaData: {
+            props: _.extend({
+                width: 200,
+                height: 200,
             }, sharedShapeMetaData.defaultColors)
         }
     }),

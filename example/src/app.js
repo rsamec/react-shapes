@@ -42,7 +42,7 @@ var App = React.createClass({
                 <TabPane eventKey={2} tab='Circle'>
                     <ShapeExample widget={Shapes.Circle}/>
                 </TabPane>
-                <TabPane eventKey={3} tab='Elippse'>
+                <TabPane eventKey={3} tab='Ellipse'>
                     <ShapeExample widget={Shapes.Ellipse}/>
                 </TabPane>
                 <TabPane eventKey={4} tab='Line'>
@@ -53,6 +53,9 @@ var App = React.createClass({
                 </TabPane>
                 <TabPane eventKey={6} tab='CornerBox'>
                     <ShapeExample widget={Shapes.CornerBox}/>
+                </TabPane>
+                <TabPane eventKey={7} tab='Triangle'>
+                    <ShapeExample widget={Shapes.Triangle}/>
                 </TabPane>
             </TabbedArea>
 
