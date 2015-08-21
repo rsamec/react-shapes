@@ -73,7 +73,7 @@ var Rectangle = (function (_React$Component2) {
                 { height: height, width: width },
                 _react2['default'].createElement(
                     'rect',
-                    _extends({}, props, { x: strokeWidth, y: strokeWidth }),
+                    _extends({}, props, { x: strokeWidth / 2, y: strokeWidth / 2 }),
                     this.props.children
                 )
             );
@@ -103,8 +103,8 @@ var Circle = (function (_React$Component3) {
             var height = r * 2 + 2 * strokeWidth;
             var width = r * 2 + 2 * strokeWidth;
 
-            var cx = r + strokeWidth;
-            var cy = r + strokeWidth;
+            var cx = r + strokeWidth / 2;
+            var cy = r + strokeWidth / 2;
             var props = _underscore2['default'].omit(this.props, 'style');
             return _react2['default'].createElement(
                 SVGComponent,
@@ -142,8 +142,9 @@ var Ellipse = (function (_React$Component4) {
             var height = ry * 2 + 2 * strokeWidth;
             var width = rx * 2 + 2 * strokeWidth;
 
-            var cx = rx + strokeWidth;
-            var cy = ry + strokeWidth;
+            var cx = rx + strokeWidth / 2;
+            var cy = ry + strokeWidth / 2;
+
             var props = _underscore2['default'].omit(this.props, 'style');
             return _react2['default'].createElement(
                 SVGComponent,
@@ -225,11 +226,9 @@ var Polyline = (function (_React$Component6) {
                 return point.y;
             }));
 
-            console.log(points);
-
             var height = y + 2 * strokeWidth;
             var width = x + 2 * strokeWidth;
-            console.log(height + ", " + width);
+
             var props = _underscore2['default'].omit(this.props, 'style');
             return _react2['default'].createElement(
                 SVGComponent,
@@ -248,8 +247,49 @@ var Polyline = (function (_React$Component6) {
 
 exports.Polyline = Polyline;
 
-var CornerLine = (function (_React$Component7) {
-    _inherits(CornerLine, _React$Component7);
+var Triangle = (function (_React$Component7) {
+    _inherits(Triangle, _React$Component7);
+
+    function Triangle() {
+        _classCallCheck(this, Triangle);
+
+        _get(Object.getPrototypeOf(Triangle.prototype), 'constructor', this).apply(this, arguments);
+    }
+
+    _createClass(Triangle, [{
+        key: 'render',
+        value: function render() {
+            var strokeWidth = this.props.strokeWidth || 0;
+            var height = this.props.height || 0;
+            var width = this.props.width || 0;
+
+            var innerHeight = height - strokeWidth / 2;
+            var innerWidth = width - strokeWidth / 2;
+
+            var points = ['0,' + innerHeight, innerWidth / 2 + ',0', innerWidth + ',' + innerHeight];
+
+            var props = _underscore2['default'].omit(this.props, 'style');
+            return _react2['default'].createElement(
+                SVGComponent,
+                { height: height + strokeWidth, width: width + strokeWidth },
+                _react2['default'].createElement(
+                    'polygon',
+                    _extends({ transform: 'translate(' + 3 * strokeWidth / 4 + ',' + 11 * strokeWidth / 10 + ')',
+                        points: points.join(' ')
+                    }, props),
+                    this.props.children
+                )
+            );
+        }
+    }]);
+
+    return Triangle;
+})(_react2['default'].Component);
+
+exports.Triangle = Triangle;
+
+var CornerLine = (function (_React$Component8) {
+    _inherits(CornerLine, _React$Component8);
 
     function CornerLine() {
         _classCallCheck(this, CornerLine);
@@ -305,8 +345,8 @@ var CornerLine = (function (_React$Component7) {
 
 exports.CornerLine = CornerLine;
 
-var CornerBox = (function (_React$Component8) {
-    _inherits(CornerBox, _React$Component8);
+var CornerBox = (function (_React$Component9) {
+    _inherits(CornerBox, _React$Component9);
 
     function CornerBox() {
         _classCallCheck(this, CornerBox);
@@ -392,6 +432,14 @@ exports['default'] = {
         metaData: {
             props: _underscore2['default'].extend({
                 points: '25,25 25,350 500,350 500,500 305,250 20,15'
+            }, sharedShapeMetaData.defaultColors)
+        }
+    }),
+    Triangle: _underscore2['default'].extend(Triangle, {
+        metaData: {
+            props: _underscore2['default'].extend({
+                width: 200,
+                height: 200
             }, sharedShapeMetaData.defaultColors)
         }
     }),
