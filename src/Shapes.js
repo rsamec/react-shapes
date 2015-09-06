@@ -185,6 +185,11 @@ export class CornerBox extends React.Component {
                                         up={up}/>)
     }
 }
+var sharedFields = {
+    fill: {type: 'colorPicker'},
+    stroke: {type: 'colorPicker'},
+    strokeWidth: {type: 'number'}
+}
 var sharedShapeMetaData = {
     defaultColors: {
         fill: '#2409ba',
@@ -199,14 +204,21 @@ export default {
             props: _.extend({
                 width: 500,
                 height: 300
-            }, sharedShapeMetaData.defaultColors)
+            }, sharedShapeMetaData.defaultColors),
+            settings:{fields:_.extend({
+                width:{type:'number'},
+                height:{type:'number'}
+            },sharedFields)}
         }
     }),
     Circle: _.extend(Circle, {
         metaData: {
             props: _.extend({
                 r: 200
-            }, sharedShapeMetaData.defaultColors)
+            }, sharedShapeMetaData.defaultColors),
+            settings:{fields:_.extend({
+                r:{type:'number'},
+            },sharedFields)}
         }
     }),
     Ellipse: _.extend(Ellipse, {
@@ -214,7 +226,12 @@ export default {
             props: _.extend({
                 rx: 300,
                 ry: 100
-            }, sharedShapeMetaData.defaultColors)
+            }, sharedShapeMetaData.defaultColors),
+            settings:{fields:_.extend({
+                rx:{type:'number'},
+                ry:{type:'number'},
+            },sharedFields)}
+
         }
     }),
     Line: _.extend(Line, {
@@ -224,14 +241,21 @@ export default {
                 y1: 25,
                 x2: 350,
                 y2: 350
-            }, sharedShapeMetaData.defaultColors)
+            }, sharedShapeMetaData.defaultColors),
+            settings:{fields:_.extend({
+                x1:{type:'number'},
+                y1:{type:'number'},
+                x2:{type:'number'},
+                y2:{type:'number'},
+            },sharedFields)}
         }
     }),
     Polyline: _.extend(Polyline, {
         metaData: {
             props: _.extend({
                 points: '25,25 25,350 500,350 500,500 305,250 20,15'
-            }, sharedShapeMetaData.defaultColors)
+            }, sharedShapeMetaData.defaultColors),
+            settings:{fields:sharedFields}
         }
     }),
     Triangle: _.extend(Triangle, {
@@ -239,7 +263,11 @@ export default {
             props: _.extend({
                 width: 200,
                 height: 200,
-            }, sharedShapeMetaData.defaultColors)
+            }, sharedShapeMetaData.defaultColors),
+            settings:{fields:_.extend({
+                width:{type:'number'},
+                height:{type:'number'}
+            },sharedFields)}
         }
     }),
     CornerBox: _.extend(CornerBox, {
@@ -250,14 +278,14 @@ export default {
                 text: 'type your text',
                 orientation: 'topLeft'
             }, sharedShapeMetaData.defaultColors),
-            settings: {
-                fields: {
-                    orientation: {
-                        type: 'select',
-                        settings: {options: ['topRight', 'topLeft', 'bottomRight', 'bottomLeft']}
-                    }
+            settings:{fields:_.extend({
+                width:{type:'number'},
+                size:{type:'number'},
+                orientation: {
+                    type: 'select',
+                    settings: {options: ['topRight', 'topLeft', 'bottomRight', 'bottomLeft']}
                 }
-            }
+            },sharedFields)}
         }
     }),
     CornerLine: _.extend(CornerLine, {
@@ -269,7 +297,14 @@ export default {
                 x: 25,
                 y: 25,
                 up: false,
-            }, sharedShapeMetaData.defaultColors)
+            }, sharedShapeMetaData.defaultColors),
+            settings: {fields:_.extend({
+                width:{type:'number'},
+                size:{type:'number'},
+                x:{type:'number'},
+                y:{type:'number'},
+                up:{type:'boolean'},
+            },sharedFields)}
         }
     })
 };

@@ -62,7 +62,8 @@
   min-width: 80px;
 }
 .jsonValue {
-  padding-left: 5px;
+  position: relative;
+  padding-left: 15px;
   flex-grow: 1;
 }
 .jsonValue > input,
@@ -87,6 +88,18 @@
   left: 0;
 }
 .jsonName:hover > .jsonRemove {
+  visibility: visible;
+}
+.jsonReset {
+  visibility: hidden;
+  padding-left: 0px;
+  text-decoration: none;
+  width: .6em;
+  display: inline-block;
+  position: absolute;
+  left: 0;
+}
+.jsonValue:hover > .jsonReset {
   visibility: visible;
 }
 .compoundToggle,
@@ -120,4 +133,7 @@
 }
 .jsonGroup {
   margin-bottom: 10px;
+}
+.bindingEditor .jsonEditor {
+  display: inline-block;
 }
