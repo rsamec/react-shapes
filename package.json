@@ -23,7 +23,7 @@
     "gulp": "^3.8.10",
     "react-bootstrap": "^0.24.3",
     "react-component-gulp-tasks": "^0.7.0",
-    "react-property-editor": "^0.1.6"
+    "react-property-editor": "^0.2.5"
   },
   "peerDependencies": {},
   "browserify": {
