@@ -1,5 +1,6 @@
 import React from 'react';
-import _  from 'underscore';
+import _  from 'lodash';
+import styleSvg from './utils/styleSvg';
 
 export class SVGComponent extends React.Component {
     render() {
@@ -12,7 +13,7 @@ export class Rectangle extends React.Component {
 
         var height = (this.props.height || 0) + 2 * strokeWidth;
         var width = (this.props.width || 0) + 2 * strokeWidth;
-        var props = _.omit(this.props, 'style');
+        var props = styleSvg(_.omit(this.props, 'style'),this.props);
 
         return (
             <SVGComponent height={height} width={width}>
@@ -30,7 +31,7 @@ export class Circle extends React.Component {
 
         var cx = r + (strokeWidth / 2);
         var cy = r + (strokeWidth / 2);
-        var props = _.omit(this.props, 'style');
+        var props = styleSvg(_.omit(this.props, 'style'),this.props);
         return (
             <SVGComponent height={height} width={width}>
                 <circle {...props} cx={cx} cy={cy}>{this.props.children}</circle>
@@ -50,7 +51,7 @@ export class Ellipse extends React.Component {
         var cx = rx + (strokeWidth / 2);
         var cy = ry + (strokeWidth / 2);
 
-        var props = _.omit(this.props, 'style');
+        var props = styleSvg(_.omit(this.props, 'style'),this.props);
         return (
             <SVGComponent height={height} width={width}>
                 <ellipse {...props} cx={cx} cy={cy}>{this.props.children}</ellipse>
@@ -69,7 +70,7 @@ export class Line extends React.Component {
         var height = y + (2 * strokeWidth);
         var width = x + (2 * strokeWidth);
 
-        var props = _.omit(this.props, 'style');
+        var props = styleSvg(_.omit(this.props, 'style'),this.props);
         return (
             <SVGComponent height={height} width={width}>
                 <line {...props}>{this.props.children}</line>
@@ -90,7 +91,7 @@ export class Polyline extends React.Component {
         var height = y + (2 * strokeWidth);
         var width = x + (2 * strokeWidth);
 
-        var props = _.omit(this.props, 'style');
+        var props = styleSvg(_.omit(this.props, 'style'),this.props);
         return (
             <SVGComponent height={height} width={width}>
                 <polyline {...props}>{this.props.children}</polyline>
@@ -108,7 +109,7 @@ export class Triangle extends React.Component {
 
         var points = ['0,' + innerHeight, innerWidth / 2 + ',0', innerWidth + ',' + innerHeight];
 
-        var props = _.omit(this.props, 'style');
+        var props = styleSvg(_.omit(this.props, 'style'),this.props);
         return (
             <SVGComponent height={height + strokeWidth} width={width + strokeWidth}>
                 <polygon transform={'translate(' + 3 * strokeWidth / 4 + ',' + 11 * strokeWidth / 10 + ')'}
@@ -151,9 +152,11 @@ export class CornerLine extends React.Component {
         var rotate = up ? 315 : 45;
         var transform = "rotate(" + rotate.toString() + ")";
 
+        var props = styleSvg(_.omit(this.props, 'style'),this.props);
+
         return (
             <SVGComponent height={size} width={size}>
-                <polyline points={points} {...this.props}></polyline>
+                <polyline points={points} {...props}></polyline>
                 <text x={x} y={y} transform={transform}>{this.props.text}</text>
             </SVGComponent>)
     }
@@ -179,7 +182,7 @@ export class CornerBox extends React.Component {
             y = size - offset;
         }
         var text = this.props.text;
-
+        //var props = styleSvg(_.omit(this.props, 'style'),this.props);
 
         return (
             <CornerLine {...this.props} size={this.props.size} width={cornerWidth} text={this.props.text} x={x} y={y}
@@ -216,7 +219,7 @@ export class Dimension extends React.Component {
 
         var d= "M" + l.join(',') +  " L" + x.join(',') + " L" + y.join(', ') + " L" + r.join(', ');
         //console.log(d);
-        var props = _.omit(this.props, 'style');
+        var props = styleSvg(_.omit(this.props, 'style'),this.props);
 
         var style = {
             strokeWidth: this.props.strokeWidth,
@@ -226,7 +229,7 @@ export class Dimension extends React.Component {
 
         return (
             <SVGComponent height={height} width={width}>
-                <path style={style} d={d}></path>
+                <path {...props} style={style} d={d}></path>
             </SVGComponent>)
     }
 }
@@ -238,8 +241,8 @@ var sharedFields = {
 }
 var sharedShapeMetaData = {
     defaultColors: {
-        fill: '#2409ba',
-        stroke: '#E65243',
+        fill: {color:'#2409ba'},
+        stroke: {color:'#E65243'},
         strokeWidth: 20
     }
 }
@@ -282,12 +285,12 @@ export default {
     }),
     Line: _.extend(Line, {
         metaData: {
-            props: _.extend({
+            props: _.omit(_.extend({
                 x1: 25,
                 y1: 25,
                 x2: 350,
                 y2: 350
-            }, sharedShapeMetaData.defaultColors),
+            }, sharedShapeMetaData.defaultColors),'fill'),
             settings:{fields:_.extend({
                 x1:{type:'number'},
                 y1:{type:'number'},
@@ -355,10 +358,10 @@ export default {
     }),
     Dimension: _.extend(Dimension, {
         metaData: {
-            props: _.extend({
+            props: _.omit(_.extend({
                 width: 250,
                 height:100,
-            }, sharedShapeMetaData.defaultColors),
+            }, sharedShapeMetaData.defaultColors),'fill'),
             settings:{fields:_.extend({
                 width:{type:'number'},
                 height:{type:'number'},

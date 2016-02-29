@@ -42,13 +42,13 @@ npm install react-shapes --save
 ```
 import {Rectangle, Circle, Ellipse, Line, Polyline, CornerBox, Triangle} from 'react-shapes';
 
-<Rectangle width={100} height={100} fill='#2409ba' stroke='#E65243' strokeWidth={3} />
-<Circle r={50} fill='#2409ba' stroke='#E65243' strokeWidth={3} />
-<Ellipse rx={300} ry={100} fill='#2409ba' stroke='#E65243' strokeWidth={3} />
-<Line x1={25} x2={350} y1={25} y2={350} fill='#2409ba' stroke='#E65243' strokeWidth={3} />
-<Polyline points='25,25 25,350 500,350 500,500 305,250 20,15' fill='#2409ba' stroke='#E65243' strokeWidth={3} />
-<CornerBox size={400} width={150} orientation='topLeft' fill='#2409ba' stroke='#E65243' strokeWidth={3} />
-<Triangle width={150} height={150} fill='#2409ba' stroke='#E65243' strokeWidth={3} />
+<Rectangle width={100} height={100} fill={{color:'#2409ba'}} stroke={{color:'#E65243'}} strokeWidth={3} />
+<Circle r={50} fill={{color:'#2409ba'}} stroke={{color:'#E65243'}} strokeWidth={3} />
+<Ellipse rx={300} ry={100} fill={{color:'#2409ba'}} stroke={{color:'#E65243'}} strokeWidth={3} />
+<Line x1={25} x2={350} y1={25} y2={350}  stroke={{color:'#E65243'}} strokeWidth={3} />
+<Polyline points='25,25 25,350 500,350 500,500 305,250 20,15' fill={{color:'#2409ba'}} stroke={{color:'#E65243'}} strokeWidth={3} />
+<CornerBox size={400} width={150} orientation='topLeft' fill={{color:'#2409ba'}} stroke={{color:'#E65243'}}strokeWidth={3} />
+<Triangle width={150} height={150} fill={{color:'#2409ba'}} stroke={{color:'#E65243'}} strokeWidth={3} />
 
 ```
 

@@ -1,6 +1,6 @@
 {
   "name": "react-shapes",
-  "version": "0.0.6",
+  "version": "0.1.0",
   "private": false,
   "description": "React shapes.",
   "main": "lib/Shapes.js",
@@ -15,28 +15,32 @@
     "url": "https://github.com/rsamec/react-shapes/issues"
   },
   "dependencies": {
-    "react": "^0.13.3",
-    "reactify": "^1.1.1",
-    "underscore": "^1.8.3"
+    "lodash": "^4.5.1",
+    "react-property-editor": "^1.0.1"
   },
   "devDependencies": {
-    "gulp": "^3.8.10",
-    "react-bootstrap": "^0.24.3",
-    "react-component-gulp-tasks": "^0.7.0",
+    "gulp": "^3.9.0",
+    "react-bootstrap": "^0.28.3",
+    "react-component-gulp-tasks": "^0.7.7",
     "react-property-editor": "^0.2.5"
   },
-  "peerDependencies": {},
-  "browserify": {
-    "transform": [
-      "reactify"
-    ]
+  "peerDependencies": {
+    "react": "^0.14.0",
+    "react-dom": "^0.14.0"
   },
   "browser": "lib/Shapes.js",
   "browserify-shim": {
     "react": "global:React"
   },
   "scripts": {
-    "test": "echo \"no tests yet\" && exit 0"
+    "build": "gulp clean && NODE_ENV=production gulp build",
+    "examples": "gulp dev:server",
+    "lint": "eslint ./; true",
+    "publish:site": "NODE_ENV=production gulp publish:examples",
+    "release": "NODE_ENV=production gulp release",
+    "start": "gulp dev",
+    "test": "echo \"no tests yet\" && exit 0",
+    "watch": "gulp watch:lib"
   },
   "keywords": [
     "react",

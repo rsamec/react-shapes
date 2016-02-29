@@ -1,18 +1,18 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import PropertyEditor from 'react-property-editor';
-import {TabbedArea, TabPane} from 'react-bootstrap';
+import {Tabs as TabbedArea,Tab as TabPane} from 'react-bootstrap';
 
 import Shapes from 'react-shapes';
-//import {Rectangle,Circle,Ellipse,Line, Polyline, CornerBox} from 'react-shapes';
 
 class ShapeExample extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {widgetProps: props.widget.metaData.props};
+        this.state = {widgetProps: props.widget.metaData.props || {}};
     }
 
     widgetPropsChanged(value) {
-        this.setState({widgetProps: value});
+        this.setState({widgetProps: value.props});
     }
 
     render() {
@@ -23,7 +23,7 @@ class ShapeExample extends React.Component {
                     {widget}
                 </div>
                 <div className="col-md-4">
-                    <PropertyEditor value={ this.state.widgetProps } settings={this.props.widget.metaData.settings}
+                    <PropertyEditor value={{props: this.state.widgetProps} } settings={this.props.widget.metaData.settings}
                                     onChange={ this.widgetPropsChanged.bind(this) }/>
                     <hr/>
                     <pre>{JSON.stringify(this.state.widgetProps, null, 2)}</pre>
@@ -32,38 +32,39 @@ class ShapeExample extends React.Component {
         )
     }
 }
-var App = React.createClass({
+class App extends React.Component
+{
     render() {
         return (
             <TabbedArea defaultActiveKey={1}>
-                <TabPane eventKey={1} tab='Rectangle'>
+                <TabPane eventKey={1} title='Rectangle'>
                     <ShapeExample widget={Shapes.Rectangle}/>
                 </TabPane>
-                <TabPane eventKey={2} tab='Circle'>
+                <TabPane eventKey={2} title='Circle'>
                     <ShapeExample widget={Shapes.Circle}/>
                 </TabPane>
-                <TabPane eventKey={3} tab='Ellipse'>
+                <TabPane eventKey={3} title='Ellipse'>
                     <ShapeExample widget={Shapes.Ellipse}/>
                 </TabPane>
-                <TabPane eventKey={4} tab='Line'>
+                <TabPane eventKey={4} title='Line'>
                     <ShapeExample widget={Shapes.Line}/>
                 </TabPane>
-                <TabPane eventKey={5} tab='Polyline'>
+                <TabPane eventKey={5} title='Polyline'>
                     <ShapeExample widget={Shapes.Polyline}/>
                 </TabPane>
-                <TabPane eventKey={6} tab='CornerBox'>
+                <TabPane eventKey={6} title='CornerBox'>
                     <ShapeExample widget={Shapes.CornerBox}/>
                 </TabPane>
-                <TabPane eventKey={7} tab='Triangle'>
+                <TabPane eventKey={7} title='Triangle'>
                     <ShapeExample widget={Shapes.Triangle}/>
                 </TabPane>
-                <TabPane eventKey={8} tab='Dimension'>
+                <TabPane eventKey={8} title='Dimension'>
                     <ShapeExample widget={Shapes.Dimension}/>
                 </TabPane>
             </TabbedArea>
 
         )
     }
-});
+};
 
-React.render(<App />, document.getElementById('app'));
+ReactDOM.render(<App />, document.getElementById('app'));
